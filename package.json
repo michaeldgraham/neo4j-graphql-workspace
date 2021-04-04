@@ -1,7 +1,7 @@
 {
   "name": "neo4j-graphql-workspace",
   "version": "1.0.0",
-  "description": "A minimal project template for progressive development of Neo4j + GraphQL schemas.",
+  "description": "A project template for progressive development of Neo4j GraphQL schemas.",
   "author": "Michael D Graham",
   "license": "MIT",
   "scripts": {
