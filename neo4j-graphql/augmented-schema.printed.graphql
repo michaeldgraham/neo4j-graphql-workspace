@@ -1,0 +1,723 @@
+type Business {
+  businessId: ID!
+  name: String!
+  address: String
+  city: String
+  state: String
+  avgStars: Float
+  location: Point
+  reviews(where: ReviewWhere, options: ReviewOptions): [Review]
+  categories(where: CategoryWhere, options: CategoryOptions): [Category]
+}
+
+input BusinessCategoriesDeleteInput {
+  where: CategoryWhere
+  delete: CategoryDeleteInput
+}
+
+input BusinessCategoriesFieldInput {
+  create: [CategoryCreateInput!]
+  connect: [CategoryConnectFieldInput!]
+}
+
+input BusinessCategoriesUpdateFieldInput {
+  where: CategoryWhere
+  update: CategoryUpdateInput
+  connect: [CategoryConnectFieldInput!]
+  disconnect: [CategoryDisconnectFieldInput!]
+  create: [CategoryCreateInput!]
+  delete: [CategoryDeleteFieldInput!]
+}
+
+input BusinessConnectFieldInput {
+  where: BusinessWhere
+  connect: BusinessConnectInput
+}
+
+input BusinessConnectInput {
+  reviews: [ReviewConnectFieldInput!]
+  categories: [CategoryConnectFieldInput!]
+}
+
+input BusinessCreateInput {
+  businessId: ID!
+  name: String!
+  address: String
+  city: String
+  state: String
+  location: PointInput
+  reviews: BusinessReviewsFieldInput
+  categories: BusinessCategoriesFieldInput
+}
+
+input BusinessDeleteFieldInput {
+  where: BusinessWhere
+  delete: BusinessDeleteInput
+}
+
+input BusinessDeleteInput {
+  reviews: [BusinessReviewsDeleteInput!]
+  categories: [BusinessCategoriesDeleteInput!]
+}
+
+input BusinessDisconnectFieldInput {
+  where: BusinessWhere
+  disconnect: BusinessDisconnectInput
+}
+
+input BusinessDisconnectInput {
+  reviews: [ReviewDisconnectFieldInput!]
+  categories: [CategoryDisconnectFieldInput!]
+}
+
+input BusinessOptions {
+  """Specify one or more BusinessSort objects to sort Businesses by. The sorts will be applied in the order in which they are arranged in the array."""
+  sort: [BusinessSort]
+  limit: Int
+  skip: Int
+}
+
+input BusinessRelationInput {
+  reviews: [ReviewCreateInput!]
+  categories: [CategoryCreateInput!]
+}
+
+input BusinessReviewsDeleteInput {
+  where: ReviewWhere
+  delete: ReviewDeleteInput
+}
+
+input BusinessReviewsFieldInput {
+  create: [ReviewCreateInput!]
+  connect: [ReviewConnectFieldInput!]
+}
+
+input BusinessReviewsUpdateFieldInput {
+  where: ReviewWhere
+  update: ReviewUpdateInput
+  connect: [ReviewConnectFieldInput!]
+  disconnect: [ReviewDisconnectFieldInput!]
+  create: [ReviewCreateInput!]
+  delete: [ReviewDeleteFieldInput!]
+}
+
+"""Fields to sort Businesses by. The order in which sorts are applied is not guaranteed when specifying many fields in one BusinessSort object."""
+input BusinessSort {
+  businessId: SortDirection
+  name: SortDirection
+  address: SortDirection
+  city: SortDirection
+  state: SortDirection
+  location: SortDirection
+}
+
+input BusinessUpdateInput {
+  businessId: ID
+  name: String
+  address: String
+  city: String
+  state: String
+  location: PointInput
+  reviews: [BusinessReviewsUpdateFieldInput!]
+  categories: [BusinessCategoriesUpdateFieldInput!]
+}
+
+input BusinessWhere {
+  OR: [BusinessWhere!]
+  AND: [BusinessWhere!]
+  businessId: ID
+  businessId_NOT: ID
+  businessId_IN: [ID]
+  businessId_NOT_IN: [ID]
+  businessId_MATCHES: String
+  businessId_CONTAINS: ID
+  businessId_NOT_CONTAINS: ID
+  businessId_STARTS_WITH: ID
+  businessId_NOT_STARTS_WITH: ID
+  businessId_ENDS_WITH: ID
+  businessId_NOT_ENDS_WITH: ID
+  name: String
+  name_NOT: String
+  name_IN: [String]
+  name_NOT_IN: [String]
+  name_MATCHES: String
+  name_CONTAINS: String
+  name_NOT_CONTAINS: String
+  name_STARTS_WITH: String
+  name_NOT_STARTS_WITH: String
+  name_ENDS_WITH: String
+  name_NOT_ENDS_WITH: String
+  address: String
+  address_NOT: String
+  address_IN: [String]
+  address_NOT_IN: [String]
+  address_MATCHES: String
+  address_CONTAINS: String
+  address_NOT_CONTAINS: String
+  address_STARTS_WITH: String
+  address_NOT_STARTS_WITH: String
+  address_ENDS_WITH: String
+  address_NOT_ENDS_WITH: String
+  city: String
+  city_NOT: String
+  city_IN: [String]
+  city_NOT_IN: [String]
+  city_MATCHES: String
+  city_CONTAINS: String
+  city_NOT_CONTAINS: String
+  city_STARTS_WITH: String
+  city_NOT_STARTS_WITH: String
+  city_ENDS_WITH: String
+  city_NOT_ENDS_WITH: String
+  state: String
+  state_NOT: String
+  state_IN: [String]
+  state_NOT_IN: [String]
+  state_MATCHES: String
+  state_CONTAINS: String
+  state_NOT_CONTAINS: String
+  state_STARTS_WITH: String
+  state_NOT_STARTS_WITH: String
+  state_ENDS_WITH: String
+  state_NOT_ENDS_WITH: String
+  location: PointInput
+  location_NOT: PointInput
+  location_IN: [PointInput]
+  location_NOT_IN: [PointInput]
+  location_DISTANCE: PointDistance
+  location_LT: PointDistance
+  location_LTE: PointDistance
+  location_GT: PointDistance
+  location_GTE: PointDistance
+  reviews: ReviewWhere
+  reviews_NOT: ReviewWhere
+  categories: CategoryWhere
+  categories_NOT: CategoryWhere
+}
+
+type Category {
+  name: ID!
+  businesses(where: BusinessWhere, options: BusinessOptions): [Business]
+}
+
+input CategoryBusinessesDeleteInput {
+  where: BusinessWhere
+  delete: BusinessDeleteInput
+}
+
+input CategoryBusinessesFieldInput {
+  create: [BusinessCreateInput!]
+  connect: [BusinessConnectFieldInput!]
+}
+
+input CategoryBusinessesUpdateFieldInput {
+  where: BusinessWhere
+  update: BusinessUpdateInput
+  connect: [BusinessConnectFieldInput!]
+  disconnect: [BusinessDisconnectFieldInput!]
+  create: [BusinessCreateInput!]
+  delete: [BusinessDeleteFieldInput!]
+}
+
+input CategoryConnectFieldInput {
+  where: CategoryWhere
+  connect: CategoryConnectInput
+}
+
+input CategoryConnectInput {
+  businesses: [BusinessConnectFieldInput!]
+}
+
+input CategoryCreateInput {
+  name: ID!
+  businesses: CategoryBusinessesFieldInput
+}
+
+input CategoryDeleteFieldInput {
+  where: CategoryWhere
+  delete: CategoryDeleteInput
+}
+
+input CategoryDeleteInput {
+  businesses: [CategoryBusinessesDeleteInput!]
+}
+
+input CategoryDisconnectFieldInput {
+  where: CategoryWhere
+  disconnect: CategoryDisconnectInput
+}
+
+input CategoryDisconnectInput {
+  businesses: [BusinessDisconnectFieldInput!]
+}
+
+input CategoryOptions {
+  """Specify one or more CategorySort objects to sort Categories by. The sorts will be applied in the order in which they are arranged in the array."""
+  sort: [CategorySort]
+  limit: Int
+  skip: Int
+}
+
+input CategoryRelationInput {
+  businesses: [BusinessCreateInput!]
+}
+
+"""Fields to sort Categories by. The order in which sorts are applied is not guaranteed when specifying many fields in one CategorySort object."""
+input CategorySort {
+  name: SortDirection
+}
+
+input CategoryUpdateInput {
+  name: ID
+  businesses: [CategoryBusinessesUpdateFieldInput!]
+}
+
+input CategoryWhere {
+  OR: [CategoryWhere!]
+  AND: [CategoryWhere!]
+  name: ID
+  name_NOT: ID
+  name_IN: [ID]
+  name_NOT_IN: [ID]
+  name_MATCHES: String
+  name_CONTAINS: ID
+  name_NOT_CONTAINS: ID
+  name_STARTS_WITH: ID
+  name_NOT_STARTS_WITH: ID
+  name_ENDS_WITH: ID
+  name_NOT_ENDS_WITH: ID
+  businesses: BusinessWhere
+  businesses_NOT: BusinessWhere
+}
+
+type CreateBusinessesMutationResponse {
+  businesses: [Business!]!
+}
+
+type CreateCategoriesMutationResponse {
+  categories: [Category!]!
+}
+
+type CreateRatingCountsMutationResponse {
+  ratingCounts: [RatingCount!]!
+}
+
+type CreateReviewsMutationResponse {
+  reviews: [Review!]!
+}
+
+type CreateUsersMutationResponse {
+  users: [User!]!
+}
+
+scalar Date
+
+type DeleteInfo {
+  nodesDeleted: Int!
+  relationshipsDeleted: Int!
+}
+
+type Mutation {
+  createBusinesses(input: [BusinessCreateInput!]!): CreateBusinessesMutationResponse!
+  deleteBusinesses(where: BusinessWhere, delete: BusinessDeleteInput): DeleteInfo!
+  updateBusinesses(where: BusinessWhere, update: BusinessUpdateInput, connect: BusinessConnectInput, disconnect: BusinessDisconnectInput, create: BusinessRelationInput, delete: BusinessDeleteInput): UpdateBusinessesMutationResponse!
+  createCategories(input: [CategoryCreateInput!]!): CreateCategoriesMutationResponse!
+  deleteCategories(where: CategoryWhere, delete: CategoryDeleteInput): DeleteInfo!
+  updateCategories(where: CategoryWhere, update: CategoryUpdateInput, connect: CategoryConnectInput, disconnect: CategoryDisconnectInput, create: CategoryRelationInput, delete: CategoryDeleteInput): UpdateCategoriesMutationResponse!
+  createRatingCounts(input: [RatingCountCreateInput!]!): CreateRatingCountsMutationResponse!
+  deleteRatingCounts(where: RatingCountWhere): DeleteInfo!
+  updateRatingCounts(where: RatingCountWhere, update: RatingCountUpdateInput): UpdateRatingCountsMutationResponse!
+  createReviews(input: [ReviewCreateInput!]!): CreateReviewsMutationResponse!
+  deleteReviews(where: ReviewWhere, delete: ReviewDeleteInput): DeleteInfo!
+  updateReviews(where: ReviewWhere, update: ReviewUpdateInput, connect: ReviewConnectInput, disconnect: ReviewDisconnectInput, create: ReviewRelationInput, delete: ReviewDeleteInput): UpdateReviewsMutationResponse!
+  createUsers(input: [UserCreateInput!]!): CreateUsersMutationResponse!
+  deleteUsers(where: UserWhere, delete: UserDeleteInput): DeleteInfo!
+  updateUsers(where: UserWhere, update: UserUpdateInput, connect: UserConnectInput, disconnect: UserDisconnectInput, create: UserRelationInput, delete: UserDeleteInput): UpdateUsersMutationResponse!
+  mergeBusinessCategory(categories: [String!]!, businessId: ID!): Business
+}
+
+type Point {
+  longitude: Float!
+  latitude: Float!
+  height: Float
+  crs: String!
+  srid: Int!
+}
+
+input PointDistance {
+  point: PointInput!
+  """The distance in metres to be used when comparing two points"""
+  distance: Float!
+}
+
+input PointInput {
+  longitude: Float!
+  latitude: Float!
+  height: Float
+}
+
+type Query {
+  businesses(where: BusinessWhere, options: BusinessOptions): [Business]!
+  categories(where: CategoryWhere, options: CategoryOptions): [Category]!
+  ratingCounts(where: RatingCountWhere, options: RatingCountOptions): [RatingCount]!
+  reviews(where: ReviewWhere, options: ReviewOptions): [Review]!
+  users(where: UserWhere, options: UserOptions): [User]!
+  ratingsCount: [RatingCount]
+  userCount: Int!
+}
+
+type RatingCount {
+  stars: Float!
+  count: Int!
+}
+
+input RatingCountCreateInput {
+  stars: Float!
+  count: Int!
+}
+
+input RatingCountOptions {
+  """Specify one or more RatingCountSort objects to sort RatingCounts by. The sorts will be applied in the order in which they are arranged in the array."""
+  sort: [RatingCountSort]
+  limit: Int
+  skip: Int
+}
+
+"""Fields to sort RatingCounts by. The order in which sorts are applied is not guaranteed when specifying many fields in one RatingCountSort object."""
+input RatingCountSort {
+  stars: SortDirection
+  count: SortDirection
+}
+
+input RatingCountUpdateInput {
+  stars: Float
+  count: Int
+}
+
+input RatingCountWhere {
+  OR: [RatingCountWhere!]
+  AND: [RatingCountWhere!]
+  stars: Float
+  stars_NOT: Float
+  stars_IN: [Float]
+  stars_NOT_IN: [Float]
+  stars_LT: Float
+  stars_LTE: Float
+  stars_GT: Float
+  stars_GTE: Float
+  count: Int
+  count_NOT: Int
+  count_IN: [Int]
+  count_NOT_IN: [Int]
+  count_LT: Int
+  count_LTE: Int
+  count_GT: Int
+  count_GTE: Int
+}
+
+type Review {
+  reviewId: ID!
+  stars: Float
+  text: String
+  date: Date
+  business(where: BusinessWhere, options: BusinessOptions): Business
+  user(where: UserWhere, options: UserOptions): User
+}
+
+input ReviewBusinessDeleteInput {
+  where: BusinessWhere
+  delete: BusinessDeleteInput
+}
+
+input ReviewBusinessFieldInput {
+  create: BusinessCreateInput
+  connect: BusinessConnectFieldInput
+}
+
+input ReviewBusinessUpdateFieldInput {
+  where: BusinessWhere
+  update: BusinessUpdateInput
+  connect: BusinessConnectFieldInput
+  disconnect: BusinessDisconnectFieldInput
+  create: BusinessCreateInput
+  delete: BusinessDeleteFieldInput
+}
+
+input ReviewConnectFieldInput {
+  where: ReviewWhere
+  connect: ReviewConnectInput
+}
+
+input ReviewConnectInput {
+  business: BusinessConnectFieldInput
+  user: UserConnectFieldInput
+}
+
+input ReviewCreateInput {
+  reviewId: ID!
+  stars: Float
+  text: String
+  date: Date
+  business: ReviewBusinessFieldInput
+  user: ReviewUserFieldInput
+}
+
+input ReviewDeleteFieldInput {
+  where: ReviewWhere
+  delete: ReviewDeleteInput
+}
+
+input ReviewDeleteInput {
+  business: ReviewBusinessDeleteInput
+  user: ReviewUserDeleteInput
+}
+
+input ReviewDisconnectFieldInput {
+  where: ReviewWhere
+  disconnect: ReviewDisconnectInput
+}
+
+input ReviewDisconnectInput {
+  business: BusinessDisconnectFieldInput
+  user: UserDisconnectFieldInput
+}
+
+input ReviewOptions {
+  """Specify one or more ReviewSort objects to sort Reviews by. The sorts will be applied in the order in which they are arranged in the array."""
+  sort: [ReviewSort]
+  limit: Int
+  skip: Int
+}
+
+input ReviewRelationInput {
+  business: BusinessCreateInput
+  user: UserCreateInput
+}
+
+"""Fields to sort Reviews by. The order in which sorts are applied is not guaranteed when specifying many fields in one ReviewSort object."""
+input ReviewSort {
+  reviewId: SortDirection
+  stars: SortDirection
+  text: SortDirection
+  date: SortDirection
+}
+
+input ReviewUpdateInput {
+  reviewId: ID
+  stars: Float
+  text: String
+  date: Date
+  business: ReviewBusinessUpdateFieldInput
+  user: ReviewUserUpdateFieldInput
+}
+
+input ReviewUserDeleteInput {
+  where: UserWhere
+  delete: UserDeleteInput
+}
+
+input ReviewUserFieldInput {
+  create: UserCreateInput
+  connect: UserConnectFieldInput
+}
+
+input ReviewUserUpdateFieldInput {
+  where: UserWhere
+  update: UserUpdateInput
+  connect: UserConnectFieldInput
+  disconnect: UserDisconnectFieldInput
+  create: UserCreateInput
+  delete: UserDeleteFieldInput
+}
+
+input ReviewWhere {
+  OR: [ReviewWhere!]
+  AND: [ReviewWhere!]
+  reviewId: ID
+  reviewId_NOT: ID
+  reviewId_IN: [ID]
+  reviewId_NOT_IN: [ID]
+  reviewId_MATCHES: String
+  reviewId_CONTAINS: ID
+  reviewId_NOT_CONTAINS: ID
+  reviewId_STARTS_WITH: ID
+  reviewId_NOT_STARTS_WITH: ID
+  reviewId_ENDS_WITH: ID
+  reviewId_NOT_ENDS_WITH: ID
+  stars: Float
+  stars_NOT: Float
+  stars_IN: [Float]
+  stars_NOT_IN: [Float]
+  stars_LT: Float
+  stars_LTE: Float
+  stars_GT: Float
+  stars_GTE: Float
+  text: String
+  text_NOT: String
+  text_IN: [String]
+  text_NOT_IN: [String]
+  text_MATCHES: String
+  text_CONTAINS: String
+  text_NOT_CONTAINS: String
+  text_STARTS_WITH: String
+  text_NOT_STARTS_WITH: String
+  text_ENDS_WITH: String
+  text_NOT_ENDS_WITH: String
+  date: Date
+  date_NOT: Date
+  date_IN: [Date]
+  date_NOT_IN: [Date]
+  business: BusinessWhere
+  business_NOT: BusinessWhere
+  business_IN: [BusinessWhere!]
+  business_NOT_IN: [BusinessWhere!]
+  user: UserWhere
+  user_NOT: UserWhere
+  user_IN: [UserWhere!]
+  user_NOT_IN: [UserWhere!]
+}
+
+enum SortDirection {
+  """Sort by field values in ascending order."""
+  ASC
+  """Sort by field values in descending order."""
+  DESC
+}
+
+type UpdateBusinessesMutationResponse {
+  businesses: [Business!]!
+}
+
+type UpdateCategoriesMutationResponse {
+  categories: [Category!]!
+}
+
+type UpdateRatingCountsMutationResponse {
+  ratingCounts: [RatingCount!]!
+}
+
+type UpdateReviewsMutationResponse {
+  reviews: [Review!]!
+}
+
+type UpdateUsersMutationResponse {
+  users: [User!]!
+}
+
+type User {
+  name: String
+  userId: ID!
+  avgStars: Float
+  numReviews: Int
+  recommendations(first: Int = 3): [Business]
+  reviews(where: ReviewWhere, options: ReviewOptions): [Review]
+}
+
+input UserConnectFieldInput {
+  where: UserWhere
+  connect: UserConnectInput
+}
+
+input UserConnectInput {
+  reviews: [ReviewConnectFieldInput!]
+}
+
+input UserCreateInput {
+  name: String
+  userId: ID!
+  reviews: UserReviewsFieldInput
+}
+
+input UserDeleteFieldInput {
+  where: UserWhere
+  delete: UserDeleteInput
+}
+
+input UserDeleteInput {
+  reviews: [UserReviewsDeleteInput!]
+}
+
+input UserDisconnectFieldInput {
+  where: UserWhere
+  disconnect: UserDisconnectInput
+}
+
+input UserDisconnectInput {
+  reviews: [ReviewDisconnectFieldInput!]
+}
+
+input UserOptions {
+  """Specify one or more UserSort objects to sort Users by. The sorts will be applied in the order in which they are arranged in the array."""
+  sort: [UserSort]
+  limit: Int
+  skip: Int
+}
+
+input UserRelationInput {
+  reviews: [ReviewCreateInput!]
+}
+
+input UserReviewsDeleteInput {
+  where: ReviewWhere
+  delete: ReviewDeleteInput
+}
+
+input UserReviewsFieldInput {
+  create: [ReviewCreateInput!]
+  connect: [ReviewConnectFieldInput!]
+}
+
+input UserReviewsUpdateFieldInput {
+  where: ReviewWhere
+  update: ReviewUpdateInput
+  connect: [ReviewConnectFieldInput!]
+  disconnect: [ReviewDisconnectFieldInput!]
+  create: [ReviewCreateInput!]
+  delete: [ReviewDeleteFieldInput!]
+}
+
+"""Fields to sort Users by. The order in which sorts are applied is not guaranteed when specifying many fields in one UserSort object."""
+input UserSort {
+  name: SortDirection
+  userId: SortDirection
+}
+
+input UserUpdateInput {
+  name: String
+  userId: ID
+  reviews: [UserReviewsUpdateFieldInput!]
+}
+
+input UserWhere {
+  OR: [UserWhere!]
+  AND: [UserWhere!]
+  name: String
+  name_NOT: String
+  name_IN: [String]
+  name_NOT_IN: [String]
+  name_MATCHES: String
+  name_CONTAINS: String
+  name_NOT_CONTAINS: String
+  name_STARTS_WITH: String
+  name_NOT_STARTS_WITH: String
+  name_ENDS_WITH: String
+  name_NOT_ENDS_WITH: String
+  userId: ID
+  userId_NOT: ID
+  userId_IN: [ID]
+  userId_NOT_IN: [ID]
+  userId_MATCHES: String
+  userId_CONTAINS: ID
+  userId_NOT_CONTAINS: ID
+  userId_STARTS_WITH: ID
+  userId_NOT_STARTS_WITH: ID
+  userId_ENDS_WITH: ID
+  userId_NOT_ENDS_WITH: ID
+  reviews: ReviewWhere
+  reviews_NOT: ReviewWhere
+}
+
+extend schema {
+  query: Query
+  mutation: Mutation
+}

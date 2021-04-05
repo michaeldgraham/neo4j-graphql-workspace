@@ -1,0 +1,726 @@
+type Business {
+  businessId: ID!
+  name: String!
+  address: String
+  city: String
+  state: String
+  location: _Neo4jPoint
+  reviews(first: Int, offset: Int, orderBy: [_ReviewOrdering], filter: _ReviewFilter): [Review] @relation(name: "REVIEWS", direction: IN)
+  categories(first: Int, offset: Int, orderBy: [_CategoryOrdering], filter: _CategoryFilter): [Category] @relation(name: "IN_CATEGORY", direction: OUT)
+  avgStars: Float @cypher(statement: """
+    MATCH (this)<-[:REVIEWS]-(r:Review)
+    RETURN coalesce(avg(r.stars),0.0)
+  """)
+  """Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node."""
+  _id: String
+}
+
+type Category {
+  name: ID!
+  businesses(first: Int, offset: Int, orderBy: [_BusinessOrdering], filter: _BusinessFilter): [Business] @relation(name: "IN_CATEGORY", direction: IN)
+  """Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node."""
+  _id: String
+}
+
+type Mutation {
+  mergeBusinessCategory(categories: [String!]!, businessId: ID!): Business @cypher(statement: """
+    MATCH (b:Business {businessId: $businessId})
+    UNWIND $categories AS cat
+    MERGE (c:Category {name: cat})
+    MERGE (b)-[:IN_CATEGORY]->(c)
+    RETURN b
+  """)
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the REVIEWS relationship."""
+  AddBusinessReviews(from: _ReviewInput!, to: _BusinessInput!): _AddBusinessReviewsPayload @MutationMeta(relationship: "REVIEWS", from: "Review", to: "Business")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the REVIEWS relationship."""
+  RemoveBusinessReviews(from: _ReviewInput!, to: _BusinessInput!): _RemoveBusinessReviewsPayload @MutationMeta(relationship: "REVIEWS", from: "Review", to: "Business")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the REVIEWS relationship."""
+  MergeBusinessReviews(from: _ReviewInput!, to: _BusinessInput!): _MergeBusinessReviewsPayload @MutationMeta(relationship: "REVIEWS", from: "Review", to: "Business")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the IN_CATEGORY relationship."""
+  AddBusinessCategories(from: _BusinessInput!, to: _CategoryInput!): _AddBusinessCategoriesPayload @MutationMeta(relationship: "IN_CATEGORY", from: "Business", to: "Category")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the IN_CATEGORY relationship."""
+  RemoveBusinessCategories(from: _BusinessInput!, to: _CategoryInput!): _RemoveBusinessCategoriesPayload @MutationMeta(relationship: "IN_CATEGORY", from: "Business", to: "Category")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the IN_CATEGORY relationship."""
+  MergeBusinessCategories(from: _BusinessInput!, to: _CategoryInput!): _MergeBusinessCategoriesPayload @MutationMeta(relationship: "IN_CATEGORY", from: "Business", to: "Category")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#create) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-nodes) a Business node."""
+  CreateBusiness(businessId: ID, name: String!, address: String, city: String, state: String, location: _Neo4jPointInput): Business
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#update) for [updating](https://neo4j.com/docs/cypher-manual/4.1/clauses/set/#set-update-a-property) a Business node."""
+  UpdateBusiness(businessId: ID!, name: String, address: String, city: String, state: String, location: _Neo4jPointInput): Business
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#delete) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-single-node) a Business node."""
+  DeleteBusiness(businessId: ID!): Business
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#merge) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-node-derived) a Business node."""
+  MergeBusiness(businessId: ID!, name: String, address: String, city: String, state: String, location: _Neo4jPointInput): Business
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the IN_CATEGORY relationship."""
+  AddCategoryBusinesses(from: _BusinessInput!, to: _CategoryInput!): _AddCategoryBusinessesPayload @MutationMeta(relationship: "IN_CATEGORY", from: "Business", to: "Category")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the IN_CATEGORY relationship."""
+  RemoveCategoryBusinesses(from: _BusinessInput!, to: _CategoryInput!): _RemoveCategoryBusinessesPayload @MutationMeta(relationship: "IN_CATEGORY", from: "Business", to: "Category")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the IN_CATEGORY relationship."""
+  MergeCategoryBusinesses(from: _BusinessInput!, to: _CategoryInput!): _MergeCategoryBusinessesPayload @MutationMeta(relationship: "IN_CATEGORY", from: "Business", to: "Category")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#create) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-nodes) a Category node."""
+  CreateCategory(name: ID): Category
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#delete) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-single-node) a Category node."""
+  DeleteCategory(name: ID!): Category
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#merge) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-node-derived) a Category node."""
+  MergeCategory(name: ID!): Category
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the REVIEWS relationship."""
+  AddReviewBusiness(from: _ReviewInput!, to: _BusinessInput!): _AddReviewBusinessPayload @MutationMeta(relationship: "REVIEWS", from: "Review", to: "Business")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the REVIEWS relationship."""
+  RemoveReviewBusiness(from: _ReviewInput!, to: _BusinessInput!): _RemoveReviewBusinessPayload @MutationMeta(relationship: "REVIEWS", from: "Review", to: "Business")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the REVIEWS relationship."""
+  MergeReviewBusiness(from: _ReviewInput!, to: _BusinessInput!): _MergeReviewBusinessPayload @MutationMeta(relationship: "REVIEWS", from: "Review", to: "Business")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the WROTE relationship."""
+  AddReviewUser(from: _UserInput!, to: _ReviewInput!): _AddReviewUserPayload @MutationMeta(relationship: "WROTE", from: "User", to: "Review")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the WROTE relationship."""
+  RemoveReviewUser(from: _UserInput!, to: _ReviewInput!): _RemoveReviewUserPayload @MutationMeta(relationship: "WROTE", from: "User", to: "Review")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the WROTE relationship."""
+  MergeReviewUser(from: _UserInput!, to: _ReviewInput!): _MergeReviewUserPayload @MutationMeta(relationship: "WROTE", from: "User", to: "Review")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#create) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-nodes) a Review node."""
+  CreateReview(reviewId: ID, stars: Float, text: String, date: _Neo4jDateInput): Review
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#update) for [updating](https://neo4j.com/docs/cypher-manual/4.1/clauses/set/#set-update-a-property) a Review node."""
+  UpdateReview(reviewId: ID!, stars: Float, text: String, date: _Neo4jDateInput): Review
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#delete) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-single-node) a Review node."""
+  DeleteReview(reviewId: ID!): Review
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#merge) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-node-derived) a Review node."""
+  MergeReview(reviewId: ID!, stars: Float, text: String, date: _Neo4jDateInput): Review
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the WROTE relationship."""
+  AddUserReviews(from: _UserInput!, to: _ReviewInput!): _AddUserReviewsPayload @MutationMeta(relationship: "WROTE", from: "User", to: "Review")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the WROTE relationship."""
+  RemoveUserReviews(from: _UserInput!, to: _ReviewInput!): _RemoveUserReviewsPayload @MutationMeta(relationship: "WROTE", from: "User", to: "Review")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the WROTE relationship."""
+  MergeUserReviews(from: _UserInput!, to: _ReviewInput!): _MergeUserReviewsPayload @MutationMeta(relationship: "WROTE", from: "User", to: "Review")
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#create) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-nodes) a User node."""
+  CreateUser(name: String, userId: ID): User
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#update) for [updating](https://neo4j.com/docs/cypher-manual/4.1/clauses/set/#set-update-a-property) a User node."""
+  UpdateUser(name: String, userId: ID!): User
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#delete) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-single-node) a User node."""
+  DeleteUser(userId: ID!): User
+  """[Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#merge) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-node-derived) a User node."""
+  MergeUser(name: String, userId: ID!): User
+}
+
+directive @MutationMeta(relationship: String, from: String, to: String) on FIELD_DEFINITION
+
+type Query {
+  ratingsCount: [RatingCount] @cypher(statement: """
+    MATCH (r:Review)
+    WITH r.stars AS stars, COUNT(*) AS count
+    ORDER BY stars
+    RETURN {
+    stars: stars,
+    count: count
+    }
+  """)
+  userCount: Int! @cypher(statement: """MATCH (u:User) RETURN COUNT(u)""")
+  """[Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for Business type nodes."""
+  Business(businessId: ID, name: String, address: String, city: String, state: String, location: _Neo4jPointInput, _id: String, first: Int, offset: Int, orderBy: [_BusinessOrdering], filter: _BusinessFilter): [Business]
+  """[Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for Category type nodes."""
+  Category(name: ID, _id: String, first: Int, offset: Int, orderBy: [_CategoryOrdering], filter: _CategoryFilter): [Category]
+  """[Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for Review type nodes."""
+  Review(reviewId: ID, stars: Float, text: String, date: _Neo4jDateInput, _id: String, first: Int, offset: Int, orderBy: [_ReviewOrdering], filter: _ReviewFilter): [Review]
+  """[Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for User type nodes."""
+  User(name: String, userId: ID, _id: String, first: Int, offset: Int, orderBy: [_UserOrdering], filter: _UserFilter): [User]
+}
+
+type RatingCount {
+  stars: Float!
+  count: Int!
+}
+
+type Review {
+  reviewId: ID!
+  stars: Float
+  text: String
+  date: _Neo4jDate
+  business(filter: _BusinessFilter): Business @relation(name: "REVIEWS", direction: OUT)
+  user(filter: _UserFilter): User @relation(name: "WROTE", direction: IN)
+  """Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node."""
+  _id: String
+}
+
+type User {
+  avgStars: Float @cypher(statement: """MATCH (this)-[:WROTE]->(r:Review) RETURN toFloat(avg(r.stars))""")
+  name: String
+  numReviews: Int @cypher(statement: """MATCH (this)-[:WROTE]->(r:Review) RETURN COUNT(r)""")
+  recommendations(first: Int = 3, offset: Int, orderBy: [_BusinessOrdering]): [Business] @cypher(statement: """
+    MATCH (this)-[:WROTE]->(r:Review)-[:REVIEWS]->(:Business)<-[:REVIEWS]-(:Review)<-[:WROTE]-(:User)-[:WROTE]->(:Review)-[:REVIEWS]->(rec:Business)
+    WHERE NOT EXISTS( (this)-[:WROTE]->(:Review)-[:REVIEWS]->(rec) )
+    WITH rec, COUNT(*) AS num
+    ORDER BY num DESC
+    LIMIT $first
+    RETURN rec
+  """)
+  reviews(first: Int, offset: Int, orderBy: [_ReviewOrdering], filter: _ReviewFilter): [Review] @relation(name: "WROTE", direction: OUT)
+  userId: ID!
+  """Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node."""
+  _id: String
+}
+
+type _AddBusinessCategoriesPayload @relation(name: "IN_CATEGORY", from: "Business", to: "Category") {
+  """Field for the Business node this IN_CATEGORY [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: Business
+  """Field for the Category node this IN_CATEGORY [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Category
+}
+
+type _AddBusinessReviewsPayload @relation(name: "REVIEWS", from: "Review", to: "Business") {
+  """Field for the Review node this REVIEWS [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: Review
+  """Field for the Business node this REVIEWS [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Business
+}
+
+type _AddCategoryBusinessesPayload @relation(name: "IN_CATEGORY", from: "Business", to: "Category") {
+  """Field for the Business node this IN_CATEGORY [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: Business
+  """Field for the Category node this IN_CATEGORY [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Category
+}
+
+type _AddReviewBusinessPayload @relation(name: "REVIEWS", from: "Review", to: "Business") {
+  """Field for the Review node this REVIEWS [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: Review
+  """Field for the Business node this REVIEWS [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Business
+}
+
+type _AddReviewUserPayload @relation(name: "WROTE", from: "User", to: "Review") {
+  """Field for the User node this WROTE [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: User
+  """Field for the Review node this WROTE [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Review
+}
+
+type _AddUserReviewsPayload @relation(name: "WROTE", from: "User", to: "Review") {
+  """Field for the User node this WROTE [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: User
+  """Field for the Review node this WROTE [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Review
+}
+
+input _BusinessFilter {
+  AND: [_BusinessFilter!]
+  OR: [_BusinessFilter!]
+  businessId: ID
+  businessId_not: ID
+  businessId_in: [ID!]
+  businessId_not_in: [ID!]
+  businessId_regexp: ID
+  businessId_contains: ID
+  businessId_not_contains: ID
+  businessId_starts_with: ID
+  businessId_not_starts_with: ID
+  businessId_ends_with: ID
+  businessId_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_regexp: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_regexp: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  city: String
+  city_not: String
+  city_in: [String!]
+  city_not_in: [String!]
+  city_regexp: String
+  city_contains: String
+  city_not_contains: String
+  city_starts_with: String
+  city_not_starts_with: String
+  city_ends_with: String
+  city_not_ends_with: String
+  state: String
+  state_not: String
+  state_in: [String!]
+  state_not_in: [String!]
+  state_regexp: String
+  state_contains: String
+  state_not_contains: String
+  state_starts_with: String
+  state_not_starts_with: String
+  state_ends_with: String
+  state_not_ends_with: String
+  location: _Neo4jPointInput
+  location_not: _Neo4jPointInput
+  location_distance: _Neo4jPointDistanceFilter
+  location_distance_lt: _Neo4jPointDistanceFilter
+  location_distance_lte: _Neo4jPointDistanceFilter
+  location_distance_gt: _Neo4jPointDistanceFilter
+  location_distance_gte: _Neo4jPointDistanceFilter
+  reviews: _ReviewFilter
+  reviews_not: _ReviewFilter
+  reviews_in: [_ReviewFilter!]
+  reviews_not_in: [_ReviewFilter!]
+  reviews_some: _ReviewFilter
+  reviews_none: _ReviewFilter
+  reviews_single: _ReviewFilter
+  reviews_every: _ReviewFilter
+  categories: _CategoryFilter
+  categories_not: _CategoryFilter
+  categories_in: [_CategoryFilter!]
+  categories_not_in: [_CategoryFilter!]
+  categories_some: _CategoryFilter
+  categories_none: _CategoryFilter
+  categories_single: _CategoryFilter
+  categories_every: _CategoryFilter
+}
+
+input _BusinessInput {
+  businessId: ID!
+}
+
+enum _BusinessOrdering {
+  businessId_asc
+  businessId_desc
+  name_asc
+  name_desc
+  address_asc
+  address_desc
+  city_asc
+  city_desc
+  state_asc
+  state_desc
+  avgStars_asc
+  avgStars_desc
+  _id_asc
+  _id_desc
+}
+
+input _CategoryFilter {
+  AND: [_CategoryFilter!]
+  OR: [_CategoryFilter!]
+  name: ID
+  name_not: ID
+  name_in: [ID!]
+  name_not_in: [ID!]
+  name_regexp: ID
+  name_contains: ID
+  name_not_contains: ID
+  name_starts_with: ID
+  name_not_starts_with: ID
+  name_ends_with: ID
+  name_not_ends_with: ID
+  businesses: _BusinessFilter
+  businesses_not: _BusinessFilter
+  businesses_in: [_BusinessFilter!]
+  businesses_not_in: [_BusinessFilter!]
+  businesses_some: _BusinessFilter
+  businesses_none: _BusinessFilter
+  businesses_single: _BusinessFilter
+  businesses_every: _BusinessFilter
+}
+
+input _CategoryInput {
+  name: ID!
+}
+
+enum _CategoryOrdering {
+  name_asc
+  name_desc
+  _id_asc
+  _id_desc
+}
+
+type _MergeBusinessCategoriesPayload @relation(name: "IN_CATEGORY", from: "Business", to: "Category") {
+  """Field for the Business node this IN_CATEGORY [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: Business
+  """Field for the Category node this IN_CATEGORY [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Category
+}
+
+type _MergeBusinessReviewsPayload @relation(name: "REVIEWS", from: "Review", to: "Business") {
+  """Field for the Review node this REVIEWS [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: Review
+  """Field for the Business node this REVIEWS [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Business
+}
+
+type _MergeCategoryBusinessesPayload @relation(name: "IN_CATEGORY", from: "Business", to: "Category") {
+  """Field for the Business node this IN_CATEGORY [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: Business
+  """Field for the Category node this IN_CATEGORY [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Category
+}
+
+type _MergeReviewBusinessPayload @relation(name: "REVIEWS", from: "Review", to: "Business") {
+  """Field for the Review node this REVIEWS [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: Review
+  """Field for the Business node this REVIEWS [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Business
+}
+
+type _MergeReviewUserPayload @relation(name: "WROTE", from: "User", to: "Review") {
+  """Field for the User node this WROTE [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: User
+  """Field for the Review node this WROTE [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Review
+}
+
+type _MergeUserReviewsPayload @relation(name: "WROTE", from: "User", to: "Review") {
+  """Field for the User node this WROTE [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: User
+  """Field for the Review node this WROTE [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Review
+}
+
+"""Generated Date object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries)."""
+type _Neo4jDate {
+  year: Int
+  month: Int
+  day: Int
+  """Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries) Date value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring) Cypher function."""
+  formatted: String
+}
+
+"""Generated Date input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments)."""
+input _Neo4jDateInput {
+  year: Int
+  month: Int
+  day: Int
+  """Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations) Date value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/date/#functions-date-create-string)."""
+  formatted: String
+}
+
+"""Generated DateTime object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries)."""
+type _Neo4jDateTime {
+  year: Int
+  month: Int
+  day: Int
+  hour: Int
+  minute: Int
+  second: Int
+  millisecond: Int
+  microsecond: Int
+  nanosecond: Int
+  timezone: String
+  """Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries) DateTime value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring) Cypher function."""
+  formatted: String
+}
+
+"""Generated DateTime input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments)."""
+input _Neo4jDateTimeInput {
+  year: Int
+  month: Int
+  day: Int
+  hour: Int
+  minute: Int
+  second: Int
+  millisecond: Int
+  microsecond: Int
+  nanosecond: Int
+  timezone: String
+  """Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations) DateTime value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/datetime/#functions-datetime-create-string)."""
+  formatted: String
+}
+
+"""Generated LocalDateTime object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries)."""
+type _Neo4jLocalDateTime {
+  year: Int
+  month: Int
+  day: Int
+  hour: Int
+  minute: Int
+  second: Int
+  millisecond: Int
+  microsecond: Int
+  nanosecond: Int
+  """Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries) LocalDateTime value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring) Cypher function."""
+  formatted: String
+}
+
+"""Generated LocalDateTime input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments)."""
+input _Neo4jLocalDateTimeInput {
+  year: Int
+  month: Int
+  day: Int
+  hour: Int
+  minute: Int
+  second: Int
+  millisecond: Int
+  microsecond: Int
+  nanosecond: Int
+  """Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations) LocalDateTime value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/localdatetime/#functions-localdatetime-create-string)."""
+  formatted: String
+}
+
+"""Generated LocalTime object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries)."""
+type _Neo4jLocalTime {
+  hour: Int
+  minute: Int
+  second: Int
+  millisecond: Int
+  microsecond: Int
+  nanosecond: Int
+  """Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries) LocalTime value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring) Cypher function."""
+  formatted: String
+}
+
+"""Generated LocalTime input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments)."""
+input _Neo4jLocalTimeInput {
+  hour: Int
+  minute: Int
+  second: Int
+  millisecond: Int
+  microsecond: Int
+  nanosecond: Int
+  """Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations) LocalTime value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/localtime/#functions-localtime-create-string)."""
+  formatted: String
+}
+
+"""Generated Point object type for Neo4j [Spatial fields](https://grandstack.io/docs/graphql-spatial-types#using-point-in-queries)."""
+type _Neo4jPoint {
+  x: Float
+  y: Float
+  z: Float
+  longitude: Float
+  latitude: Float
+  height: Float
+  crs: String
+  srid: Int
+}
+
+input _Neo4jPointDistanceFilter {
+  point: _Neo4jPointInput!
+  distance: Float!
+}
+
+"""Generated Point input object for Neo4j [Spatial field arguments](https://grandstack.io/docs/graphql-spatial-types/#point-query-arguments)."""
+input _Neo4jPointInput {
+  x: Float
+  y: Float
+  z: Float
+  longitude: Float
+  latitude: Float
+  height: Float
+  crs: String
+  srid: Int
+}
+
+"""Generated Time object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries)."""
+type _Neo4jTime {
+  hour: Int
+  minute: Int
+  second: Int
+  millisecond: Int
+  microsecond: Int
+  nanosecond: Int
+  timezone: String
+  """Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries) Time value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring) Cypher function."""
+  formatted: String
+}
+
+"""Generated Time input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments)."""
+input _Neo4jTimeInput {
+  hour: Int
+  minute: Int
+  second: Int
+  millisecond: Int
+  microsecond: Int
+  nanosecond: Int
+  timezone: String
+  """Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations) Time value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/time/#functions-time-create-string)."""
+  formatted: String
+}
+
+enum _RelationDirections {
+  IN
+  OUT
+}
+
+type _RemoveBusinessCategoriesPayload @relation(name: "IN_CATEGORY", from: "Business", to: "Category") {
+  """Field for the Business node this IN_CATEGORY [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: Business
+  """Field for the Category node this IN_CATEGORY [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Category
+}
+
+type _RemoveBusinessReviewsPayload @relation(name: "REVIEWS", from: "Review", to: "Business") {
+  """Field for the Review node this REVIEWS [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: Review
+  """Field for the Business node this REVIEWS [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Business
+}
+
+type _RemoveCategoryBusinessesPayload @relation(name: "IN_CATEGORY", from: "Business", to: "Category") {
+  """Field for the Business node this IN_CATEGORY [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: Business
+  """Field for the Category node this IN_CATEGORY [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Category
+}
+
+type _RemoveReviewBusinessPayload @relation(name: "REVIEWS", from: "Review", to: "Business") {
+  """Field for the Review node this REVIEWS [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: Review
+  """Field for the Business node this REVIEWS [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Business
+}
+
+type _RemoveReviewUserPayload @relation(name: "WROTE", from: "User", to: "Review") {
+  """Field for the User node this WROTE [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: User
+  """Field for the Review node this WROTE [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Review
+}
+
+type _RemoveUserReviewsPayload @relation(name: "WROTE", from: "User", to: "Review") {
+  """Field for the User node this WROTE [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from."""
+  from: User
+  """Field for the Review node this WROTE [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to."""
+  to: Review
+}
+
+input _ReviewFilter {
+  AND: [_ReviewFilter!]
+  OR: [_ReviewFilter!]
+  reviewId: ID
+  reviewId_not: ID
+  reviewId_in: [ID!]
+  reviewId_not_in: [ID!]
+  reviewId_regexp: ID
+  reviewId_contains: ID
+  reviewId_not_contains: ID
+  reviewId_starts_with: ID
+  reviewId_not_starts_with: ID
+  reviewId_ends_with: ID
+  reviewId_not_ends_with: ID
+  stars: Float
+  stars_not: Float
+  stars_in: [Float!]
+  stars_not_in: [Float!]
+  stars_lt: Float
+  stars_lte: Float
+  stars_gt: Float
+  stars_gte: Float
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_regexp: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  date: _Neo4jDateInput
+  date_not: _Neo4jDateInput
+  date_in: [_Neo4jDateInput!]
+  date_not_in: [_Neo4jDateInput!]
+  date_lt: _Neo4jDateInput
+  date_lte: _Neo4jDateInput
+  date_gt: _Neo4jDateInput
+  date_gte: _Neo4jDateInput
+  business: _BusinessFilter
+  business_not: _BusinessFilter
+  business_in: [_BusinessFilter!]
+  business_not_in: [_BusinessFilter!]
+  user: _UserFilter
+  user_not: _UserFilter
+  user_in: [_UserFilter!]
+  user_not_in: [_UserFilter!]
+}
+
+input _ReviewInput {
+  reviewId: ID!
+}
+
+enum _ReviewOrdering {
+  reviewId_asc
+  reviewId_desc
+  stars_asc
+  stars_desc
+  text_asc
+  text_desc
+  date_asc
+  date_desc
+  _id_asc
+  _id_desc
+}
+
+input _UserFilter {
+  AND: [_UserFilter!]
+  OR: [_UserFilter!]
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_regexp: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  reviews: _ReviewFilter
+  reviews_not: _ReviewFilter
+  reviews_in: [_ReviewFilter!]
+  reviews_not_in: [_ReviewFilter!]
+  reviews_some: _ReviewFilter
+  reviews_none: _ReviewFilter
+  reviews_single: _ReviewFilter
+  reviews_every: _ReviewFilter
+  userId: ID
+  userId_not: ID
+  userId_in: [ID!]
+  userId_not_in: [ID!]
+  userId_regexp: ID
+  userId_contains: ID
+  userId_not_contains: ID
+  userId_starts_with: ID
+  userId_not_starts_with: ID
+  userId_ends_with: ID
+  userId_not_ends_with: ID
+}
+
+input _UserInput {
+  userId: ID!
+}
+
+enum _UserOrdering {
+  avgStars_asc
+  avgStars_desc
+  name_asc
+  name_desc
+  numReviews_asc
+  numReviews_desc
+  userId_asc
+  userId_desc
+  _id_asc
+  _id_desc
+}
+
+directive @additionalLabels(labels: [String]) on OBJECT
+
+directive @cypher(statement: String) on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @id on FIELD_DEFINITION
+
+directive @index on FIELD_DEFINITION
+
+directive @neo4j_ignore on FIELD_DEFINITION
+
+directive @relation(name: String, direction: _RelationDirections, from: String, to: String) on FIELD_DEFINITION | OBJECT
+
+directive @search(index: String) on FIELD_DEFINITION
+
+directive @unique on FIELD_DEFINITION
+
+extend schema {
+  query: Query
+  mutation: Mutation
+}

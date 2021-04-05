@@ -1,16 +1,13 @@
-import { typeDefs } from './graphql-schema'
 import { ApolloServer } from 'apollo-server-express'
 import express from 'express'
 import neo4j from 'neo4j-driver'
-import { Neo4jGraphQL } from '@neo4j/graphql'
+import { schema } from './augmented-schema'
 import dotenv from 'dotenv'
 
 // set environment variables from .env
 dotenv.config()
 
 const app = express()
-
-const neoSchema = new Neo4jGraphQL({ typeDefs });
 
 /*
  * Create a Neo4j driver instance to connect to the database
@@ -32,7 +29,7 @@ const driver = neo4j.driver(
  * generated resolvers to connect to the database.
  */
 const server = new ApolloServer({
-  schema: neoSchema.schema,
+  schema,
   context: ({ req }) => ({ req, driver, neo4jDatabase: process.env.NEO4J_DATABASE }),
   introspection: true,
   playground: true,

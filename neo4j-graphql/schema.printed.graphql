@@ -38,9 +38,7 @@ type Query {
     count: count
     }
   """)
-  userCount: Int! @cypher(statement: """
-    MATCH (u:User) RETURN COUNT(u)
-  """)
+  userCount: Int! @cypher(statement: """MATCH (u:User) RETURN COUNT(u)""")
 }
 
 type RatingCount {
@@ -58,13 +56,9 @@ type Review {
 }
 
 type User {
-  avgStars: Float @cypher(statement: """
-    MATCH (this)-[:WROTE]->(r:Review) RETURN toFloat(avg(r.stars))
-  """)
+  avgStars: Float @cypher(statement: """MATCH (this)-[:WROTE]->(r:Review) RETURN toFloat(avg(r.stars))""")
   name: String
-  numReviews: Int @cypher(statement: """
-    MATCH (this)-[:WROTE]->(r:Review) RETURN COUNT(r)
-  """)
+  numReviews: Int @cypher(statement: """MATCH (this)-[:WROTE]->(r:Review) RETURN COUNT(r)""")
   recommendations(first: Int = 3): [Business] @cypher(statement: """
     MATCH (this)-[:WROTE]->(r:Review)-[:REVIEWS]->(:Business)<-[:REVIEWS]-(:Review)<-[:WROTE]-(:User)-[:WROTE]->(:Review)-[:REVIEWS]->(rec:Business)
     WHERE NOT EXISTS( (this)-[:WROTE]->(:Review)-[:REVIEWS]->(rec) )
