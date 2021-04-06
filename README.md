@@ -10,7 +10,6 @@ Schema files and a server setup script exist for both the neo4j-graphql-js and @
 
 * [@neo4j/graphql](https://www.npmjs.com/package/@neo4j/graphql)
   Neo4j product alpha of neo4j-graphql-js
-<br>
 
 ### Recommended Dependencies
 The following dependencies are used to assist the development of Neo4j-GraphQL schemas:
