@@ -49,3 +49,4 @@ All other dependencies are used for building and running the server startup file
 ## Roadmap
   * Add example operations for both neo4j-graphql-js and @neo4j/graphql that use nested mutations to seed the database.
     * Provide the data available from https://cdn.neo4jlabs.com/data/grandstack_businesses.csv, similar to the [GRANDstack Starter Kit](https://github.com/grand-stack/grand-stack-starter/blob/master/api/src/seed/seed-mutations.js), to each root mutation when pre-processing its argument values using a custom resolver function. 
+  * Add examples of the authorization strategies available for neo4j-graphql-js and @neo4j/graphql
