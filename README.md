@@ -26,15 +26,12 @@ The following dependencies are used to assist the development of Neo4j-GraphQL s
 
 ## Recommended Workflow
 1. Modify the contents of the [/schema directory](https://github.com/michaeldgraham/neo4j-graphql-workspace/tree/main/neo4j-graphql-js/schema).
-<br>
 
 2. Use the `print` command from [@graphql-workspaces/cli](https://www.npmjs.com/package/@graphql-workspaces/cli) to print the merged contents of the `/schema` directory to a [schema.printed.graphql](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/schema.printed.graphql) file next to it:
     
     * Run `gql print schema`
-<br>
 
 3. Use the below scripts to run the [server file](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/index.js) and start the API at [localhost:4001/graphql](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/514d4caa9e24ccbfbb7c4fd153ffb73f680362dc/neo4j-graphql-js/index.js#L41) or to print [the result](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/augmented-schema.printed.graphql) of the Neo4j-GraphQL augmentation of the merged type definitions in `schema.printed.graphql`.
-<br>
 
 4. Add, modify, or rename any files or directories in the `/schema` directory and repeat workflow.
 
