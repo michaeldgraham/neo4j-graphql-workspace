@@ -6,14 +6,21 @@ Schema files and a server setup script exist for both the neo4j-graphql-js and @
 
 * [neo4j-graphql-js](https://www.npmjs.com/package/neo4j-graphql-js)<br>
   A GraphQL to Cypher query execution layer for Neo4j and JavaScript GraphQL implementations.
+  <br>
+
 * [@neo4j/graphql](https://www.npmjs.com/package/@neo4j/graphql)<br>
   Neo4j product alpha of neo4j-graphql-js
+
 ### Recommended Dependencies
 The following dependencies are used to assist the development of Neo4j-GraphQL schemas:
 * [@graphql-workspaces/cli](https://www.npmjs.com/package/@graphql-workspaces/cli)<br>
   A CLI for GraphQL workflow.
+  <br>
+
 * [graphql-tag](https://www.npmjs.com/package/graphql-tag)<br>
   A JavaScript template literal tag that parses GraphQL queries.
+  <br>
+
 * [cypher-tag](https://www.npmjs.com/package/cypher-tag)<br>
   A JavaScript template literal tag for Cypher in GraphQL.
 
