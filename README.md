@@ -29,6 +29,7 @@ The following dependencies are used to assist the development of Neo4j-GraphQL s
 <br>
 
 2. Use the `print` command from [@graphql-workspaces/cli](https://www.npmjs.com/package/@graphql-workspaces/cli) to print the merged contents of the `/schema` directory to a [schema.printed.graphql](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/schema.printed.graphql) file next to it:
+    
     * Run `gql print schema`
 <br>
 
