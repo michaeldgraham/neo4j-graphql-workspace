@@ -24,6 +24,7 @@ The following dependencies are used to assist the development of Neo4j-GraphQL s
 * [cypher-tag](https://www.npmjs.com/package/cypher-tag)<br>
   A JavaScript template literal tag for Cypher in GraphQL.
 
+### Scripts
 You can print the result of the schema augmentation process from either neo4j-graphql library using the following scripts that use [@graphql-workspaces/cli](https://www.npmjs.com/package/@graphql-workspaces/cli) locally:
 
 * `npm run print:neo4j-graphql-js`
