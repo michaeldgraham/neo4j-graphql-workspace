@@ -11,12 +11,14 @@
     "print:neo4j-graphql": "./node_modules/.bin/gql print neo4j-graphql/augmented-schema.js"
   },
   "dependencies": {
-    "@graphql-workspaces/cli": "^1.0.1",
+    "@graphql-workspaces/cli": "^1.0.11",
     "@neo4j/graphql": "^1.0.0-alpha.6",
     "apollo-server-express": "^2.22.2",
+    "cypher-tag": "^1.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^15.5.0",
+    "graphql-tag": "^2.11.0",
     "neo4j-driver": "^4.2.3",
     "neo4j-graphql-js": "^2.19.2",
     "nodemon": "^2.0.7"
@@ -34,8 +36,6 @@
     "babel-plugin-auto-import": "^1.0.5",
     "babel-plugin-module-resolver": "^4.0.0",
     "cross-env": "^7.0.2",
-    "cypher-tag": "^1.0.0",
-    "graphql-tag": "^2.11.0",
     "shx": "^0.3.2"
   }
 }
