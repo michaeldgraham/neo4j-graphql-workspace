@@ -1,6 +1,13 @@
 ## Neo4j GraphQL Workspace
 A project template for progressive development of [Neo4j](https://neo4j.com/product/neo4j-graph-database/) [GraphQL](https://graphql.org/) schemas.
 
+## Technologies
+[Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) or [template](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) this repository after installing the following technologies:
+  * Sign up for [GitHub](https://github.com/) and optionally install [GitHub Desktop](https://desktop.github.com/).
+  * [Node.js](https://nodejs.org/en/) to use the [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) programming language for server programming.
+  * The [Neo4j graph database](https://neo4j.com/download/) version appropriate for your operating system.
+  * The [Visual Studio Code](https://code.visualstudio.com/) editor or an equivalent.
+
 ## Workspaces
 [Schema files](https://github.com/michaeldgraham/neo4j-graphql-workspace/tree/main/neo4j-graphql-js/schema), a [server file](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/index.js), and npm scripts exist for both the neo4j-graphql-js and @neo4j/graphql libraries. The `/schema` directory for both contains a decomposition of the type definitions in [this schema](https://github.com/grand-stack/grand-stack-starter/blob/master/api/src/schema.graphql) used by the [GRANDstack Starter Kit](https://github.com/grand-stack/grand-stack-starter).
 
@@ -50,13 +57,6 @@ All other dependencies are used for building and running the server startup file
 
 * `npm run start:neo4j-graphql-js`
 * `npm run start:neo4j-graphql`
-
-## Technologies
-  * Install [Node.js](https://nodejs.org/en/) to use the [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) programming language for server programming.
-  * Install the [Neo4j graph database](https://neo4j.com/download/) version appropriate for your operating system.
-  * Install the [Visual Studio Code](https://code.visualstudio.com/) editor or an equivalent.
-  * Sign up for [GitHub](https://github.com/) and optionally install [GitHub Desktop](https://desktop.github.com/).
-  * Clone, fork, or template this repository.
 ## Roadmap
   * Add example operations for both neo4j-graphql-js and @neo4j/graphql that use nested mutations to seed the database.
     * Provide the data available from https://cdn.neo4jlabs.com/data/grandstack_businesses.csv, similar to the [GRANDstack Starter Kit](https://github.com/grand-stack/grand-stack-starter/blob/master/api/src/seed/seed-mutations.js), to each root mutation when pre-processing its argument values using a custom resolver function. 
