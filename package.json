@@ -5,9 +5,9 @@
   "author": "Michael D Graham",
   "license": "MIT",
   "scripts": {
-    "start:neo4j-graphql-js": "cross-env DEBUG=neo4j-graphql-js ./node_modules/.bin/nodemon --watch neo4j-graphql-js/schema --ext js,graphql --exec babel-node  neo4j-graphql-js/index.js",
+    "start:neo4j-graphql-js": "cross-env DEBUG=neo4j-graphql-js ./node_modules/.bin/nodemon --watch neo4j-graphql-js/schema --ext js,graphql --exec babel-node  neo4j-graphql-js/server.js",
     "print:neo4j-graphql-js": "./node_modules/.bin/gql print neo4j-graphql-js/augmented-schema.js",
-    "start:neo4j-graphql": "cross-env DEBUG=neo4j-graphql-js ./node_modules/.bin/nodemon --watch neo4j-graphql/schema --ext js,graphql --exec babel-node neo4j-graphql/index.js",
+    "start:neo4j-graphql": "cross-env DEBUG=neo4j-graphql-js ./node_modules/.bin/nodemon --watch neo4j-graphql/schema --ext js,graphql --exec babel-node neo4j-graphql/server.js",
     "print:neo4j-graphql": "./node_modules/.bin/gql print neo4j-graphql/augmented-schema.js"
   },
   "dependencies": {
