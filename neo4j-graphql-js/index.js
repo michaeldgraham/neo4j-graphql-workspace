@@ -1,8 +1,7 @@
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
-import { loadWorkspaceSync } from '@graphql-workspaces/load';
 import neo4j from 'neo4j-driver';
-import { makeAugmentedSchema } from 'neo4j-graphql-js';
+import { schema } from './augmented-schema.js';
 import dotenv from 'dotenv';
 
 // set environment variables from .env
@@ -25,19 +24,6 @@ const driver = neo4j.driver(
     process.env.NEO4J_PASSWORD || 'letmein'
   )
 );
-
-const typeDefs = loadWorkspaceSync('neo4j-graphql-js/schema');
-const schema = makeAugmentedSchema({
-  typeDefs,
-  config: {
-    query: {
-      exclude: ['RatingCount'],
-    },
-    mutation: {
-      exclude: ['RatingCount'],
-    },
-  },
-});
 
 /*
  * Create a new ApolloServer instance, serving the GraphQL schema

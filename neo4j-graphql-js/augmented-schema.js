@@ -1,5 +1,7 @@
+import { loadWorkspaceSync } from '@graphql-workspaces/load';
 import { makeAugmentedSchema } from 'neo4j-graphql-js';
-import { typeDefs } from './graphql-schema';
+
+const typeDefs = loadWorkspaceSync('neo4j-graphql-js/schema');
 
 export const schema = makeAugmentedSchema({
   typeDefs,

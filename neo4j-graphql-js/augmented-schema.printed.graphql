@@ -106,8 +106,8 @@ type Query {
     WITH r.stars AS stars, COUNT(*) AS count
     ORDER BY stars
     RETURN {
-    stars: stars,
-    count: count
+      stars: stars, 
+      count: count
     }
   """)
   userCount: Int! @cypher(statement: """MATCH (u:User) RETURN COUNT(u)""")
@@ -144,9 +144,9 @@ type User {
   recommendations(first: Int = 3, offset: Int, orderBy: [_BusinessOrdering]): [Business] @cypher(statement: """
     MATCH (this)-[:WROTE]->(r:Review)-[:REVIEWS]->(:Business)<-[:REVIEWS]-(:Review)<-[:WROTE]-(:User)-[:WROTE]->(:Review)-[:REVIEWS]->(rec:Business)
     WHERE NOT EXISTS( (this)-[:WROTE]->(:Review)-[:REVIEWS]->(rec) )
-    WITH rec, COUNT(*) AS num
-    ORDER BY num DESC
-    LIMIT $first
+    WITH rec, COUNT(*) AS num 
+    ORDER BY num DESC 
+    LIMIT $first 
     RETURN rec
   """)
   reviews(first: Int, offset: Int, orderBy: [_ReviewOrdering], filter: _ReviewFilter): [Review] @relation(name: "WROTE", direction: OUT)
