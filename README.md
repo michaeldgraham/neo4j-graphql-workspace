@@ -13,9 +13,6 @@ A project template for progressive development of Neo4j GraphQL schemas.
 
 ## Recommended Dependencies
 The following dependencies are used to assist the development of Neo4j-GraphQL schemas:
-* [@graphql-workspaces/cli](https://www.npmjs.com/package/@graphql-workspaces/cli)<br>
-  A CLI for GraphQL workflow.
-  <br>
 
 * [graphql-tag](https://www.npmjs.com/package/graphql-tag)<br>
   A JavaScript template literal tag that parses GraphQL queries.
@@ -23,7 +20,15 @@ The following dependencies are used to assist the development of Neo4j-GraphQL s
 
 * [cypher-tag](https://www.npmjs.com/package/cypher-tag)<br>
   A JavaScript template literal tag for Cypher in GraphQL.
+  <br>
 
+* [@graphql-workspaces/cli](https://www.npmjs.com/package/@graphql-workspaces/cli)<br>
+  A CLI for GraphQL workflow.
+  <br>
+
+* [@graphql-workspaces/load](https://www.npmjs.com/package/@graphql-workspaces/load)<br>
+  A wrapper around the [load-files](https://www.graphql-tools.com/docs/api/modules/load-files) and [merge](https://www.graphql-tools.com/docs/api/modules/merge#mergetypedefs) modules from [graphql-tools](https://www.graphql-tools.com/docs/schema-merging#merging-type-definitions) used to load and merge schema files.
+ 
 ## Recommended Workflow
 1. Modify the contents of the [/schema directory](https://github.com/michaeldgraham/neo4j-graphql-workspace/tree/main/neo4j-graphql-js/schema).
 
