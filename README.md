@@ -2,7 +2,7 @@
 A project template for progressive development of [Neo4j](https://neo4j.com/product/neo4j-graph-database/) [GraphQL](https://graphql.org/) schemas.
 
 ## Technologies
-After installing the following technologies, [fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) or [template](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) this repository
+After installing the following technologies, [fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) or [template](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) this repository.
   * Sign up for [GitHub](https://github.com/) and optionally install [GitHub Desktop](https://desktop.github.com/).
   * [Node.js](https://nodejs.org/en/) to use the [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) programming language for server programming.
   * The [Neo4j graph database](https://neo4j.com/download/) version appropriate for your operating system.
