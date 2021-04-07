@@ -9,7 +9,7 @@ A project template for progressive development of [Neo4j](https://neo4j.com/prod
   * The [Visual Studio Code](https://code.visualstudio.com/) editor or an equivalent.
 
 ## Workspaces
-[Schema files](https://github.com/michaeldgraham/neo4j-graphql-workspace/tree/main/neo4j-graphql-js/schema), a [server file](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/index.js), and npm scripts exist for both the neo4j-graphql-js and @neo4j/graphql libraries. The `/schema` directory for both contains a decomposition of the type definitions in [this schema](https://github.com/grand-stack/grand-stack-starter/blob/master/api/src/schema.graphql) used by the [GRANDstack Starter Kit](https://github.com/grand-stack/grand-stack-starter).
+[Schema files](https://github.com/michaeldgraham/neo4j-graphql-workspace/tree/main/neo4j-graphql-js/schema), a [server file](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/server.js), and npm scripts exist for both the neo4j-graphql-js and @neo4j/graphql libraries. The `/schema` directory for both contains a decomposition of the type definitions in [this schema](https://github.com/grand-stack/grand-stack-starter/blob/master/api/src/schema.graphql) used by the [GRANDstack Starter Kit](https://github.com/grand-stack/grand-stack-starter).
 
 * [neo4j-graphql-js](https://www.npmjs.com/package/neo4j-graphql-js)<br>
   A GraphQL to Cypher query execution layer for Neo4j and JavaScript GraphQL implementations.
@@ -43,7 +43,7 @@ The following dependencies are used to assist the development of Neo4j-GraphQL s
     
     * Run `gql print schema`
 
-3. Use the below scripts to run the [server file](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/index.js) and start the API at [localhost:4001/graphql](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/514d4caa9e24ccbfbb7c4fd153ffb73f680362dc/neo4j-graphql-js/index.js#L41) or to print [the result](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/augmented-schema.printed.graphql) of the Neo4j-GraphQL augmentation of the merged type definitions in `schema.printed.graphql`.
+3. Use the below scripts to run the [server file](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/server.js) and start the API at [localhost:4001/graphql](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/f5775a5a1a2ff2102b2d532e4eff52fb7d4f5d8a/neo4j-graphql-js/server.js#L13) or to print [the result](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/augmented-schema.printed.graphql) of the Neo4j-GraphQL augmentation of the merged type definitions in `schema.printed.graphql`.
 
 4. Add, modify, or rename any files or directories in `/schema` and repeat workflow.
 
