@@ -1,5 +1,5 @@
 ## Neo4j GraphQL Workspace
-A project template for progressive development of Neo4j GraphQL schemas.
+A project template for progressive development of [Neo4j](https://neo4j.com/product/neo4j-graph-database/) [GraphQL](https://graphql.org/) schemas.
 
 ## Workspaces
 [Schema files](https://github.com/michaeldgraham/neo4j-graphql-workspace/tree/main/neo4j-graphql-js/schema), a [server file](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/index.js), and npm scripts exist for both the neo4j-graphql-js and @neo4j/graphql libraries. The `/schema` directory for both contains a decomposition of the type definitions in [this schema](https://github.com/grand-stack/grand-stack-starter/blob/master/api/src/schema.graphql) used by the [GRANDstack Starter Kit](https://github.com/grand-stack/grand-stack-starter).
@@ -11,7 +11,7 @@ A project template for progressive development of Neo4j GraphQL schemas.
 * [@neo4j/graphql](https://www.npmjs.com/package/@neo4j/graphql)<br>
   Neo4j product alpha of neo4j-graphql-js
 
-## Recommended Dependencies
+## Dependencies
 The following dependencies are used to assist the development of Neo4j-GraphQL schemas:
 
 * [graphql-tag](https://www.npmjs.com/package/graphql-tag)<br>
@@ -29,7 +29,7 @@ The following dependencies are used to assist the development of Neo4j-GraphQL s
 * [@graphql-workspaces/load](https://www.npmjs.com/package/@graphql-workspaces/load)<br>
   A wrapper around the [load-files](https://www.graphql-tools.com/docs/api/modules/load-files) and [merge](https://www.graphql-tools.com/docs/api/modules/merge#mergetypedefs) modules from [graphql-tools](https://www.graphql-tools.com/docs/schema-merging#merging-type-definitions) used to load and merge schema files.
  
-## Recommended Workflow
+## Workflow
 1. Modify the contents of the [/schema directory](https://github.com/michaeldgraham/neo4j-graphql-workspace/tree/main/neo4j-graphql-js/schema).
 
 2. Use the `print` command from [@graphql-workspaces/cli](https://www.npmjs.com/package/@graphql-workspaces/cli) to print the merged contents of the `/schema` directory to a [schema.printed.graphql](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/schema.printed.graphql) file next to it:
@@ -51,6 +51,12 @@ All other dependencies are used for building and running the server startup file
 * `npm run start:neo4j-graphql-js`
 * `npm run start:neo4j-graphql`
 
+## Technologies
+  * Install [Node.js](https://nodejs.org/en/) to use the [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) programming language for server programming.
+  * Install the [Neo4j graph database](https://neo4j.com/download/) version appropriate for your operating system.
+  * Install the [Visual Studio Code](https://code.visualstudio.com/) editor or an equivalent.
+  * Sign up for [GitHub](https://github.com/) and optionally install [GitHub Desktop](https://desktop.github.com/).
+  * Clone, fork, or template this repository.
 ## Roadmap
   * Add example operations for both neo4j-graphql-js and @neo4j/graphql that use nested mutations to seed the database.
     * Provide the data available from https://cdn.neo4jlabs.com/data/grandstack_businesses.csv, similar to the [GRANDstack Starter Kit](https://github.com/grand-stack/grand-stack-starter/blob/master/api/src/seed/seed-mutations.js), to each root mutation when pre-processing its argument values using a custom resolver function. 
