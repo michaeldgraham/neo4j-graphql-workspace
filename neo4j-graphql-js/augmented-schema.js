@@ -5,6 +5,10 @@ const typeDefs = loadWorkspaceSync('neo4j-graphql-js/schema');
 
 export const schema = makeAugmentedSchema({
   typeDefs,
+  documentation: true,
+  query: true,
+  mutation: true,
+  auth: false,
   config: {
     query: {
       exclude: ['RatingCount'],
