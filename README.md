@@ -19,9 +19,11 @@ Here are some resources for learning more about the above technologies:
   * Cypher
     * [Cypher graph query language](https://neo4j.com/developer/cypher/) used by Neo4j
     * [Comparing SQL with Cypher](https://neo4j.com/developer/cypher/guide-sql-to-cypher/)
+    <br>
 * 🎥 Watch
   * [GraphQL From the Ground Up by Ellen Shapiro](https://www.youtube.com/watch?v=84KzA3FG5Q4)
   * [Documenary about GraphQL](https://www.youtube.com/watch?v=783ccP__No8&t=18s)
+  <br>
 * ☑️ Try
   * [Practical, hands-on trainings](https://odyssey.apollographql.com/) for learning GraphQL with [Apollo Odyssey](https://odyssey.apollographql.com/about)
   * [SpaceX GraphQL API](https://api.spacex.land/graphql/)
@@ -32,7 +34,6 @@ Here are some resources for learning more about the above technologies:
 * [neo4j-graphql-js](https://www.npmjs.com/package/neo4j-graphql-js)
   A GraphQL to Cypher query execution layer for Neo4j and JavaScript GraphQL implementations.
   * [Documentation](https://grandstack.io/docs/neo4j-graphql-js)
-  <br>
 
 * [@neo4j/graphql](https://www.npmjs.com/package/@neo4j/graphql)<br>
   Neo4j product beta of neo4j-graphql-js
