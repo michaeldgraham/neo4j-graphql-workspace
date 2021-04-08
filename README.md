@@ -20,7 +20,7 @@ Here are some resources for learning more about the above technologies:
     <br>
 * 🎥 Watch
   * [GraphQL From the Ground Up by Ellen Shapiro](https://www.youtube.com/watch?v=84KzA3FG5Q4)
-  * [Documenary about GraphQL](https://www.youtube.com/watch?v=783ccP__No8&t=18s)
+  * [GraphQL: The Documentary](https://www.youtube.com/watch?v=783ccP__No8&t=18s)
   <br>
 * ☑️ Try
   * [Practical, hands-on trainings](https://odyssey.apollographql.com/) for learning GraphQL with [Apollo Odyssey](https://odyssey.apollographql.com/about)
