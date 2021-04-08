@@ -2,23 +2,45 @@
 A project template for progressive development of [Neo4j](https://neo4j.com/product/neo4j-graph-database/) [GraphQL](https://graphql.org/) schemas.
 
 ## Technologies 🛠️
-After installing the following technologies, [fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) or [template](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) this repository.
-  * Sign up for [GitHub](https://github.com/) and optionally install [GitHub Desktop](https://desktop.github.com/).
-  * [Node.js](https://nodejs.org/en/) to use the [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) programming language for server programming.
-  * The [Neo4j graph database](https://neo4j.com/download/) version appropriate for your operating system.
-  * The [Visual Studio Code](https://code.visualstudio.com/) editor or an equivalent.
+These technologies are necessary or recommended to get started with development:
+
+* Install the [Node.js](https://nodejs.org/en/) runtime to use the [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) language for server programming
+* Download [Neo4j Desktop](https://neo4j.com/download/) or the database version appropriate for your machine
+* Install the [Visual Studio Code](https://code.visualstudio.com/) editor or an equivalent
+* [Sign up](https://studio.apollographql.com/login) for [Apollo Studio](https://www.apollographql.com/docs/studio/) to use the [Explorer GraphQL IDE](https://www.apollographql.com/docs/studio/explorer/)
+
+## Learning 
+Here are some resources for learning more about the above technologies:
+* 📘 Read
+  * GraphQL
+    * [GraphQL API language](https://graphql.org/learn/)
+    * [Why GraphQL?](https://www.apollographql.com/docs/intro/benefits/)
+    * Apollo GraphQL [Server](https://www.apollographql.com/docs/apollo-server/) and [Client](https://www.apollographql.com/docs/react/) resources
+  * Cypher
+    * [Cypher graph query language](https://neo4j.com/developer/cypher/) used by Neo4j
+    * [Comparing SQL with Cypher](https://neo4j.com/developer/cypher/guide-sql-to-cypher/)
+* 🎥 Watch
+  * [GraphQL From the Ground Up by Ellen Shapiro](https://www.youtube.com/watch?v=84KzA3FG5Q4)
+  * [Documenary about GraphQL](https://www.youtube.com/watch?v=783ccP__No8&t=18s)
+* ☑️ Try
+  * [Practical, hands-on trainings](https://odyssey.apollographql.com/) for learning GraphQL with [Apollo Odyssey](https://odyssey.apollographql.com/about)
+  * [SpaceX GraphQL API](https://api.spacex.land/graphql/)
+  * [GitHub GraphQL API](https://docs.github.com/en/graphql/overview/explorer)
 ## Workspaces 💼
 [Schema files](https://github.com/michaeldgraham/neo4j-graphql-workspace/tree/main/neo4j-graphql-js/schema), a [server file](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/server.js), and npm scripts exist for both the neo4j-graphql-js and @neo4j/graphql libraries. The `/schema` directory for both contains a decomposition of the type definitions in [this schema](https://github.com/grand-stack/grand-stack-starter/blob/master/api/src/schema.graphql) used by the [GRANDstack Starter Kit](https://github.com/grand-stack/grand-stack-starter).
 
-* [neo4j-graphql-js](https://www.npmjs.com/package/neo4j-graphql-js)<br>
+* [neo4j-graphql-js](https://www.npmjs.com/package/neo4j-graphql-js)
   A GraphQL to Cypher query execution layer for Neo4j and JavaScript GraphQL implementations.
+  * [Documentation](https://grandstack.io/docs/neo4j-graphql-js)
   <br>
 
 * [@neo4j/graphql](https://www.npmjs.com/package/@neo4j/graphql)<br>
-  Neo4j product alpha of neo4j-graphql-js
+  Neo4j product beta of neo4j-graphql-js
+  * [Documentation](https://neo4j.com/docs/graphql-manual/current/)
 
 ## Dependencies 🌐
-The following dependencies are used to assist the development of Neo4j-GraphQL schemas:
+
+Run `npm install` in your terminal to install project dependencies. The following libraries are used to assist the development of Neo4j-GraphQL schemas:
 
 * [graphql-tag](https://www.npmjs.com/package/graphql-tag)<br>
   A JavaScript template literal tag that parses GraphQL queries.
@@ -57,8 +79,8 @@ All other dependencies are used for building and running the server startup file
 * `npm run start:neo4j-graphql-js`
 * `npm run start:neo4j-graphql`
 ## Roadmap 🗺️
-  * Add example operations for both neo4j-graphql-js and @neo4j/graphql that use nested mutations to seed the database.
-    * Provide the data available from https://cdn.neo4jlabs.com/data/grandstack_businesses.csv, similar to the [GRANDstack Starter Kit](https://github.com/grand-stack/grand-stack-starter/blob/master/api/src/seed/seed-mutations.js), to each root mutation when pre-processing its argument values using a custom resolver function. 
-  * Add examples of the authorization strategies available for neo4j-graphql-js and @neo4j/graphql.
-  * Use these [utility functions](https://www.graphql-tools.com/docs/api/modules/utils/#functions-1) from [graphql-tools](https://www.graphql-tools.com/docs/introduction) to support automated migration between integration libraries.
-    * Look into adding some functions from [@graphql-inspector/core](https://www.npmjs.com/package/@graphql-inspector/core) to such a process.
+* Add example operations for both neo4j-graphql-js and @neo4j/graphql that use nested mutations to seed the database.
+  * Provide the data available from https://cdn.neo4jlabs.com/data/grandstack_businesses.csv, similar to the [GRANDstack Starter Kit](https://github.com/grand-stack/grand-stack-starter/blob/master/api/src/seed/seed-mutations.js), to each root mutation when pre-processing its argument values using a custom resolver function. 
+* Add examples of the authorization strategies available for neo4j-graphql-js and @neo4j/graphql.
+* Use these [utility functions](https://www.graphql-tools.com/docs/api/modules/utils/#functions-1) from [graphql-tools](https://www.graphql-tools.com/docs/introduction) to support automated migration between integration libraries.
+  * Look into adding some functions from [@graphql-inspector/core](https://www.npmjs.com/package/@graphql-inspector/core) to such a process.
