@@ -14,7 +14,7 @@ Here are some resources for learning more about the above technologies:
 * 📘 Read
   * [GraphQL API language](https://graphql.org/learn/)
     * [Why GraphQL?](https://www.apollographql.com/docs/intro/benefits/)
-    * Apollo GraphQL [Server](https://www.apollographql.com/docs/apollo-server/) and [Client](https://www.apollographql.com/docs/react/) resources
+    * [Server](https://www.apollographql.com/docs/apollo-server/) and [Client](https://www.apollographql.com/docs/react/) resources from Apollo GraphQL
   * [Cypher graph query language](https://neo4j.com/developer/cypher/)
     * [Comparing SQL with Cypher](https://neo4j.com/developer/cypher/guide-sql-to-cypher/)
     <br>
