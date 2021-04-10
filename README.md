@@ -1,6 +1,6 @@
 ## Neo4j GraphQL Workspace
-A project template for progressive development of [Neo4j](https://neo4j.com/product/neo4j-graph-database/) [GraphQL](https://graphql.org/) schemas.
-
+A project template for using [Apollo GraphQL](https://www.apollographql.com/) with a [Neo4j graph database](https://neo4j.com/product/neo4j-graph-database/).
+![apollo_and_neo4j](readme_logo.png)
 ## Technologies 🛠️
 These technologies are necessary or recommended to get started with development:
 
