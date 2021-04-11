@@ -60,9 +60,11 @@ Run `npm install` in your terminal to install project dependencies. The followin
 ## Workflow 🔁
 1. Modify the contents of the [/schema directory](https://github.com/michaeldgraham/neo4j-graphql-workspace/tree/main/neo4j-graphql-js/schema).
 
-2. Use the `print` command from [@graphql-workspaces/cli](https://www.npmjs.com/package/@graphql-workspaces/cli) to print the merged contents of the `/schema` directory to a [schema.printed.graphql](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/schema.printed.graphql) file next to it:
+2. Use the [print](https://github.com/michaeldgraham/graphql-workspaces/tree/main/packages/cli#print) command from [@graphql-workspaces/cli](https://www.npmjs.com/package/@graphql-workspaces/cli) to print the merged contents of the `/schema` directory to a [schema.printed.graphql](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/schema.printed.graphql) file next to it. Use the [--watch](https://github.com/michaeldgraham/graphql-workspaces/tree/main/packages/cli#gql-print-path-watch--w) or [--validate](https://github.com/michaeldgraham/graphql-workspaces/tree/main/packages/cli#gql-print-path-validate--v) arguments to watch for file changes or validate the merged type definitions.
     
-    * Run `gql print schema`
+    * Print: `gql print schema`
+    * Watch: `gql print schema --watch`
+    * Validate: `gql print schema --validate`
 
 3. Use the below scripts to run the [server file](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/server.js) and start the API at [localhost:4001/graphql](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/f5775a5a1a2ff2102b2d532e4eff52fb7d4f5d8a/neo4j-graphql-js/server.js#L13) or to print [the result](https://github.com/michaeldgraham/neo4j-graphql-workspace/blob/main/neo4j-graphql-js/augmented-schema.printed.graphql) of the Neo4j-GraphQL augmentation of the merged type definitions in `schema.printed.graphql`.
 
