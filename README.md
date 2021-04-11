@@ -3,15 +3,15 @@ A project template for using [Apollo GraphQL](https://www.apollographql.com/) wi
 <br><br>
 ![apollo_and_neo4j](readme_logo.png)
 ## Technologies 🛠️
-These technologies are necessary or recommended to get started with development:
+The below technologies are necessary or recommended to get started with development:
 
 * Install the [Node.js](https://nodejs.org/en/) runtime to use the [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) language for server programming
 * Download [Neo4j Desktop](https://neo4j.com/download/) or the database version appropriate for your machine
-* Install the [Visual Studio Code](https://code.visualstudio.com/) editor or an equivalent
-* [Sign up](https://studio.apollographql.com/login) for [Apollo Studio](https://www.apollographql.com/docs/studio/) to use the [Explorer GraphQL IDE](https://www.apollographql.com/docs/studio/explorer/)
+* Install the [Visual Studio Code](https://code.visualstudio.com/) editor
+* [Sign up](https://studio.apollographql.com/login) for [Apollo Studio](https://www.apollographql.com/docs/studio/) to use their [Explorer GraphQL IDE](https://www.apollographql.com/docs/studio/explorer/)
 
-## Learning 
-Here are some resources for learning more about the above technologies:
+## Learning 🚀
+Here is an evolving list of resources for learning more about the above technologies:
 * 📘 Read
   * [GraphQL API language](https://graphql.org/learn/)
     * [Why GraphQL?](https://www.apollographql.com/docs/intro/benefits/)
